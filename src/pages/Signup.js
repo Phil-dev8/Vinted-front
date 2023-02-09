@@ -17,12 +17,13 @@ const Signup = () => {
           email: email,
           username: username,
           password: password,
-          newsletter: true,
+          newsletter: false,
         }
       );
       setSubmit(response.data);
       console.log(response.data);
       Cookies.set("token", response.data.account.token);
+      console.log(Cookies);
     } catch (error) {
       console.log(error.response, "NOWAY");
     }
@@ -32,6 +33,7 @@ const Signup = () => {
     <div>
       <h1>S'inscrire</h1>
       <form
+        onSubmit={fetchData}
         style={{
           display: "flex",
           justifyContent: "center",
@@ -65,7 +67,7 @@ const Signup = () => {
             setPassword(event.target.value);
           }}
         />
-        <input type="checkbox" value={true} />
+        <input type="checkbox" />
 
         <p>
           En m'inscrivant je confirme avoir lu et accepté les Terme & Conditions
@@ -73,13 +75,7 @@ const Signup = () => {
           18 ans.
         </p>
       </form>
-      <button
-        style={{ backgroundColor: "#2aaeb7" }}
-        type="submit"
-        onClick={() => {
-          fetchData();
-        }}
-      >
+      <button type="submit" style={{ backgroundColor: "#2aaeb7" }}>
         S'enregistrer !
       </button>
       <Link to="/login"> Tu as déjà un compte? Connecte-toi ! </Link>
